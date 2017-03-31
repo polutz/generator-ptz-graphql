@@ -1,4 +1,4 @@
-//import { id, createdBy, dtChanged } from '../../core/api/entityBaseGraphQL';
+import { IUserApp } from 'ptz-user-domain';
 
 import {
     GraphQLObjectType,
