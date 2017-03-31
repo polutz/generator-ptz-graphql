@@ -1,0 +1,39 @@
+{
+  "name": "generator-ptz-graphql",
+  "version": "1.1.1",
+  "description": "Yeoman generator to create polutz graphql server.",
+  "main": "index.js",
+  "scripts": {
+    "mocha": "mocha ./generators/**/*.test.js",
+    "test": "nyc npm run mocha && nyc report --reporter=text-lcov > coverage.lcov && codecov --token=b4eb97b1-8562-45c1-848d-cee9499a769f"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/polutz/generator-ptz-graphql.git"
+  },
+  "keywords": [
+    "yeoman-generator",
+    "polutz",
+    "domain",
+    "ddd",
+    "generator"
+  ],
+  "author": "angeloocana.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/polutz/generator-ptz-graphql/issues"
+  },
+  "homepage": "https://github.com/polutz/generator-ptz-graphql#readme",
+  "devDependencies": {
+    "codecov": "^1.0.1",
+    "mocha": "^3.2.0",
+    "nyc": "^10.1.2",
+    "yeoman-assert": "^3.0.0",
+    "yeoman-generator": "^1.1.1",
+    "yeoman-test": "^1.6.0"
+  },
+  "dependencies": {
+    "istanbul": "^0.4.5",
+    "mocha-lcov-reporter": "^1.3.0"
+  }
+}
