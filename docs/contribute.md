@@ -3,17 +3,17 @@
 
 ## Setup
 
-[pt-br](https://github.com/polutz/generator-ptz-react/docs/contribute.pt-br.md)
-[en-us](https://github.com/polutz/generator-ptz-react/docs/contribute.md)
+[pt-br](https://github.com/polutz/generator-ptz-graphql/docs/contribute.pt-br.md)
+[en-us](https://github.com/polutz/generator-ptz-graphql/docs/contribute.md)
 
 ### Download project
 ```
-    git clone https://github.com/polutz/generator-ptz-react.git
+    git clone https://github.com/polutz/generator-ptz-graphql.git
 ```
 
 ### Go to project folder
 ```
-    cd generator-ptz-react
+    cd generator-ptz-graphql
 ```
 
 ### Install dependencies
@@ -27,7 +27,7 @@
 
 ### Make it globally
 
-With 'npm link', you can run 'yo ptz-react' from anywhere on your machine,
+With 'npm link', you can run 'yo ptz-graphql' from anywhere on your machine,
 and it will always points to this directory
 
 ```
@@ -44,15 +44,15 @@ and it will always points to this directory
 
 ### Create test project folder
 ```
-    mkdir ptz-react-test && cd ptz-react-test 
+    mkdir ptz-graphql-test && cd ptz-graphql-test 
 ```
 
 ### Clean test project folder
 ```
-    cd .. && rm -r ptz-react-test && mkdir ptz-react-test && cd ptz-react-test
+    cd .. && rm -r ptz-graphql-test && mkdir ptz-graphql-test && cd ptz-graphql-test
 ```
 
 ### Run Yeoman
 ```
-    yo ptz-react
+    yo ptz-graphql
 ```

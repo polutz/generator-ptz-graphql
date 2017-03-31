@@ -1,6 +1,6 @@
 //falling to use graphql in other module
 //import {UserSchema} from 'ptz-user-graphql';
-import UserSchema from './userSchema';
+import UserSchema from '../users/userSchema';
 //import { IUserApp } from 'ptz-user-app';
 
 import {

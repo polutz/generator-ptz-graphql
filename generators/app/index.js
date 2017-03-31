@@ -34,7 +34,7 @@ module.exports = class extends Generator {
         const pkg = _.merge({
             //"description": "this is a Polutz React App.",
             scripts: {
-                "open:src": "babel-node tools/srcServer.js"
+                "start": "npm run js && babel-node --presets es2015 dist/index.js"
             }
         }, currentPkg);
 
@@ -70,6 +70,10 @@ module.exports = class extends Generator {
     //default - If the method name doesn't match a priority, it will be pushed to this group.
     default() {
         this.log('default');
+
+        this.options.ptz.dontCreateIndexTs = true;
+        this.options.ptz.dontCreateErrorsTs = true;
+
         this.composeWith(require.resolve('generator-ptz/generators/app'), {
             isComposing: true,
             skipInstall: this.options.skipInstall,
@@ -96,6 +100,7 @@ module.exports = class extends Generator {
         this.npmInstall(['express'], { 'save': true });
         this.npmInstall(['graphql'], { 'save': true });
         this.npmInstall(['express-graphql'], { 'save': true });
+        this.npmInstall(['graphql-relay'], { 'save': true });
         this.npmInstall(['mongodb'], { 'save': true });
 
         this.npmInstall(['ptz-user-app'], { 'save': true });
