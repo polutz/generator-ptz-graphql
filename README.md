@@ -8,6 +8,10 @@
 
 Yeoman generator to create polutz domain modules.
 
+## How to contribute
+[pt-br](https://github.com/polutz/generator-ptz-graphql/docs/contribute.pt-br.md)
+[en-us](https://github.com/polutz/generator-ptz-graphql/docs/contribute.md)
+
 ## Install
 You can remove 'yo typings' if you already have them installed
 ```
@@ -18,10 +22,4 @@ You can remove 'yo typings' if you already have them installed
 Go to your project folder and run:
 ```    
     yo ptz-graphql && typings install
-```
-
-## Create an Entity class
-replace 'EntityName' with your class name, using first letter as upercase
-```    
-    yo ptz-graphql:entity EntityName
 ```
