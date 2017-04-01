@@ -8,16 +8,18 @@ import { MongoClient } from 'mongodb';
 import { graphql } from 'graphql';
 import { introspectionQuery } from 'graphql/utilities';
 import * as fs from 'fs';
+import cors from 'cors';
 
 import { UserApp } from 'ptz-user-app';
 import { UserRepository } from 'ptz-user-repository';
 
 var app = express();
+app.use(cors());
 
 console.log('starting server');
 
 const MONGO_URL = 'mongodb://localhost:27017/polutz-graphql-test',
-    PORT = 3000;
+    PORT = 3011;
 
 (async () => {
     try {

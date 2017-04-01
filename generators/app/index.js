@@ -98,6 +98,7 @@ module.exports = class extends Generator {
 
         this.npmInstall(['dotenv'], { 'save': true });
         this.npmInstall(['express'], { 'save': true });
+        this.npmInstall(['cors'], { 'save': true });
         this.npmInstall(['graphql'], { 'save': true });
         this.npmInstall(['express-graphql'], { 'save': true });
         this.npmInstall(['graphql-relay'], { 'save': true });
