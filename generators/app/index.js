@@ -34,7 +34,9 @@ module.exports = class extends Generator {
         const pkg = _.merge({
             //"description": "this is a Polutz React App.",
             scripts: {
-                "start": "npm run js && babel-node --presets es2015 dist/index.js"
+                "start": "npm-run-all --parallel gensalt server",
+                "server": "npm run js && babel-node --presets es2015 dist/index.js",
+                "gensalt": "node gensalt.js"
             }
         }, currentPkg);
 
@@ -45,6 +47,12 @@ module.exports = class extends Generator {
             this.templatePath('_README.md'),
             this.destinationPath('README.md'),
             this.options.ptz);
+
+        // gensalt - DEGING
+        // Creates envirioment variables for password hash
+        this.fs.copy(this.templatePath('_gensalt.js'),
+            this.destinationPath('gensalt.js'));
+        // src - END
 
 
         // src - DEGING

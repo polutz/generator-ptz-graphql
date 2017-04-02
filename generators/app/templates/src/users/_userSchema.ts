@@ -77,7 +77,17 @@ function UserSchema(userApp: IUserApp) {
                 store: outputStore
             },
 
-            mutateAndGetPayload: userApp.save
+            mutateAndGetPayload: async function (userArgs) {
+                try {
+                    console.log('saving user:', userArgs);
+                    const savedUser = await userApp.save(userArgs);
+                    console.log('saved user:', savedUser);
+                    return savedUser;
+                }
+                catch (e) {
+                    console.log('Error saving user:', e);
+                }
+            }
         });
     }
 
