@@ -1,6 +1,10 @@
 ## master
 
 
+## 1.0.5 (April 4, 2017)
+
+* Add bcryptjs.
+
 ## 1.0.4 (April 4, 2017)
 
 * Add lodash.
