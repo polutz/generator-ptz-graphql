@@ -1,5 +1,8 @@
 ## master
 
+## 1.0.3 (April 4, 2017)
+
+* Move yeoman-generator from --save-dev to --save.
 
 ## 1.0.2 (April 2, 2017)
 
