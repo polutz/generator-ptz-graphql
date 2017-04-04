@@ -111,6 +111,7 @@ module.exports = class extends Generator {
         this.npmInstall(['express-graphql'], { 'save': true });
         this.npmInstall(['graphql-relay'], { 'save': true });
         this.npmInstall(['mongodb'], { 'save': true });
+        this.npmInstall(['bcryptjs'], { 'save': true });
 
         this.npmInstall(['ptz-user-app'], { 'save': true });
         this.npmInstall(['ptz-user-domain'], { 'save': true });
