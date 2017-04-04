@@ -1,5 +1,10 @@
 ## master
 
+
+## 1.0.4 (April 4, 2017)
+
+* Add lodash.
+
 ## 1.0.3 (April 4, 2017)
 
 * Move yeoman-generator from --save-dev to --save.
