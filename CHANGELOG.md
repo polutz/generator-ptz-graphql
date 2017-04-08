@@ -1,8 +1,9 @@
 ## master
 
 
-## 1. (April 7, 2017)
+## 1.0.6 (April 7, 2017)
 
+* Add log and seed users.
 * move dependencies to package.json.
 
 ## 1.0.5 (April 4, 2017)
