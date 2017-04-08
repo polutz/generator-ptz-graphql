@@ -40,7 +40,11 @@ const MONGO_URL = 'mongodb://localhost:27017/polutz-graphql-test',
             graphiql: true
         }));
 
-        app.listen(PORT, () => console.log('Listening on port ' + PORT));
+        app.listen(PORT, () => {
+            log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> \n',
+                'Running on http://localhost:' + PORT + '/ \n',
+                '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+        });
 
         //Generate schema.json
         var json = await graphql(schema, introspectionQuery);
