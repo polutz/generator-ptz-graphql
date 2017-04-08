@@ -21,10 +21,6 @@
     npm install -g yo
 ```
 
-```
-    npm install && typings install
-```
-
 ### Instalar globalmente
 
 With 'npm link', you can run 'yo ptz-graphql' from anywhere on your machine,

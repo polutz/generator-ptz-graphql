@@ -1,6 +1,10 @@
 ## master
 
 
+## 1. (April 7, 2017)
+
+* move dependencies to package.json.
+
 ## 1.0.5 (April 4, 2017)
 
 * Add bcryptjs.

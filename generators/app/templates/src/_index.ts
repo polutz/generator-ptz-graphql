@@ -24,7 +24,15 @@ const MONGO_URL = 'mongodb://localhost:27017/polutz-graphql-test',
 (async () => {
     try {
         var db = await MongoClient.connect(MONGO_URL);
-        var userApp = new UserApp(new UserRepository(db));
+        
+        var log = console.log;
+
+        var userApp = new UserApp({
+            userRepository: new UserRepository(db),
+            log
+        });
+        userApp.seed();
+
         var schema = Schema(userApp);
 
         app.use('/', GraphQlHttp({

@@ -1,24 +1,23 @@
 import { IUserApp } from 'ptz-user-domain';
 
 import {
-    GraphQLObjectType,
-    GraphQLNonNull,
     GraphQLBoolean,
-    GraphQLString,
-    GraphQLList
+    GraphQLList,
+    GraphQLNonNull,
+    GraphQLObjectType,
+    GraphQLString
 } from 'graphql';
 
 import {
-    connectionDefinitions,
-    mutationWithClientMutationId,
     connectionArgs,
-    connectionFromPromisedArray
+    connectionDefinitions,
+    connectionFromPromisedArray,
+    mutationWithClientMutationId
 } from 'graphql-relay';
-
 
 function UserSchema(userApp: IUserApp) {
 
-    var userType = new GraphQLObjectType({
+    const userType = new GraphQLObjectType({
         name: 'User',
         fields: () => ({
             id: { type: GraphQLString },
@@ -27,13 +26,13 @@ function UserSchema(userApp: IUserApp) {
             emailConfirmed: { type: GraphQLBoolean },
             displayName: { type: GraphQLString },
             imgUrl: { type: GraphQLString },
-            //createdBy,
-            //dtChanged,
+            // createdBy,
+            // dtChanged,
             errors: { type: new GraphQLList(GraphQLString) }
         })
     });
 
-    var userConnection = connectionDefinitions({
+    const userConnection = connectionDefinitions({
         name: 'User',
         nodeType: userType
     });
@@ -49,7 +48,7 @@ function UserSchema(userApp: IUserApp) {
                     args
                 );
             }
-        }
+        };
     }
 
     function getSaveUserMutation(outputStore) {
@@ -71,20 +70,19 @@ function UserSchema(userApp: IUserApp) {
                     type: userConnection.edgeType,
                     resolve: (user) => {
                         console.log('ql user', user);
-                        return { node: user, cursor: user.id }
+                        return { node: user, cursor: user.id };
                     }
                 },
                 store: outputStore
             },
 
-            mutateAndGetPayload: async function (userArgs) {
+            mutateAndGetPayload: async userArgs => {
                 try {
                     console.log('saving user:', userArgs);
                     const savedUser = await userApp.save(userArgs);
                     console.log('saved user:', savedUser);
                     return savedUser;
-                }
-                catch (e) {
+                } catch (e) {
                     console.log('Error saving user:', e);
                 }
             }
@@ -94,7 +92,7 @@ function UserSchema(userApp: IUserApp) {
     return {
         getSaveUserMutation,
         getUserConnection
-    }
+    };
 }
 
 export default UserSchema;

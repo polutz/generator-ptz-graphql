@@ -1,31 +1,31 @@
-import UserSchema from '../users/userSchema';
 import { IUserApp } from 'ptz-user-domain';
+import UserSchema from '../users/userSchema';
 
 import {
-    GraphQLSchema,
-    GraphQLObjectType,
+    GraphQLID,
     GraphQLInt,
-    GraphQLString,
     GraphQLList,
     GraphQLNonNull,
-    GraphQLID
+    GraphQLObjectType,
+    GraphQLSchema,
+    GraphQLString
 } from 'graphql';
 
 import {
-    globalIdField,
-    connectionDefinitions,
     connectionArgs,
+    connectionDefinitions,
     connectionFromPromisedArray,
+    globalIdField,
     mutationWithClientMutationId
 } from 'graphql-relay';
 
 function Schema(userApp: IUserApp) {
 
-    var userSchema = UserSchema(userApp);
+    const userSchema = UserSchema(userApp);
 
-    var store = {};
+    const store = {};
 
-    var storeType = new GraphQLObjectType({
+    const storeType = new GraphQLObjectType({
         name: 'Store',
         fields: () => ({
             id: globalIdField('Store'),
@@ -33,15 +33,12 @@ function Schema(userApp: IUserApp) {
         })
     });
 
-    var outputStore = {
+    const outputStore = {
         type: storeType,
         resolve: () => store
     };
 
-    console.log("userSchema", userSchema);
-    console.log("userSchema.getUserConnection()>>>>>>>>>>", userSchema.getUserConnection());
-
-    var schema = new GraphQLSchema({
+    const schema = new GraphQLSchema({
         query: new GraphQLObjectType({
             name: 'Query',
             fields: () => ({
@@ -57,7 +54,7 @@ function Schema(userApp: IUserApp) {
             fields: () => ({
                 saveUser: userSchema.getSaveUserMutation(outputStore)
             })
-        })    
+        })
     });
 
     return schema;

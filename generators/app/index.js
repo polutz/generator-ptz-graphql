@@ -27,8 +27,6 @@ module.exports = class extends Generator {
 
     //writing - Where you write the generator specific files (routes, controllers, etc)
     writing() {
-        console.log('ptz-domain options =>>>>>>>>>>>>>>>>>>>>>>>>>>>>', this.options.ptz);
-
         const currentPkg = this.fs.readJSON(this.destinationPath('package.json'), {});
 
         const pkg = _.merge({
@@ -37,6 +35,19 @@ module.exports = class extends Generator {
                 "start": "npm-run-all --parallel gensalt server",
                 "server": "npm run js && babel-node --presets es2015 dist/index.js",
                 "gensalt": "node gensalt.js"
+            },
+            dependencies: {
+                "bcryptjs": "^2.4.3",
+                "cors": "^2.8.3",
+                "dotenv": "^4.0.0",
+                "express": "^4.15.2",
+                "express-graphql": "^0.6.4",
+                "graphql": "^0.9.2",
+                "graphql-relay": "^0.5.1",
+                "mongodb": "^2.2.25",
+                "ptz-user-app": "^1.2.0",
+                "ptz-user-domain": "^1.2.3",
+                "ptz-user-repository": "^1.1.1"
             }
         }, currentPkg);
 
@@ -91,35 +102,13 @@ module.exports = class extends Generator {
 
     //conflicts - Where conflicts are handled (used internally)
     conflicts() {
-        this.log('conflicts');
     }
 
     //install - Where installation are run (npm, bower)
     install() {
-        console.log('install from ptz-domain');
-        console.log(this.options.ptz.runNpmInstall);
-
-        if (!this.options.ptz.runNpmInstall)
-            return;
-
-        console.log('installing from ptz-domain');
-
-        this.npmInstall(['dotenv'], { 'save': true });
-        this.npmInstall(['express'], { 'save': true });
-        this.npmInstall(['cors'], { 'save': true });
-        this.npmInstall(['graphql'], { 'save': true });
-        this.npmInstall(['express-graphql'], { 'save': true });
-        this.npmInstall(['graphql-relay'], { 'save': true });
-        this.npmInstall(['mongodb'], { 'save': true });
-        this.npmInstall(['bcryptjs'], { 'save': true });
-
-        this.npmInstall(['ptz-user-app'], { 'save': true });
-        this.npmInstall(['ptz-user-domain'], { 'save': true });
-        this.npmInstall(['ptz-user-repository'], { 'save': true });
     }
 
     //end - Called last, cleanup, say good bye, etc
     end() {
-        this.log('end');
     }
 };

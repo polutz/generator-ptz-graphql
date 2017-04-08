@@ -21,10 +21,6 @@
     npm install -g yo
 ```
 
-```
-    npm install && typings install
-```
-
 ### Make it globally
 
 With 'npm link', you can run 'yo ptz-graphql' from anywhere on your machine,
@@ -33,7 +29,6 @@ and it will always points to this directory
 ```
     npm link
 ```
-
 
 ## Tests
 ```

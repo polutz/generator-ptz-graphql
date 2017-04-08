@@ -14,15 +14,12 @@ describe('ptz-domain:app', function () {
 
         it('creates files', function () {
             assert.file([
-                'gulpfile.js',
                 'LICENSE',
                 'package.json',
                 'README.md',
                 'tsconfig.json',
-                'typings.json',
                 '.gitignore',
                 '.travis.yml',
-                'typings/index.d.ts',
                 'src/index.ts'
             ]);
         });
