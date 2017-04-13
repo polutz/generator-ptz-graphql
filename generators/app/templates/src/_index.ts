@@ -18,10 +18,26 @@ import log from 'ptz-log';
 var app = express();
 app.use(cors());
 
-console.log('starting server');
+log('starting server');
 
-const MONGO_URL = 'mongodb://localhost:27017/polutz-graphql-test',
+const MONGO_URL = 'mongodb://localhost:27017/<%= appname %>',
     PORT = 3011;
+
+function getRunningUrl(path) {
+    return `http://localhost:${PORT}${path}`;
+}
+
+async function createGraphqlSchema(schema) {
+    var json = await graphql(schema, introspectionQuery);
+    var file = '/public/schema.json';
+    fs.writeFile(`.${file}`, JSON.stringify(json, null, 2), err => {
+        if (err) throw err;
+
+        log('Json schema created!', getRunningUrl(file));
+    });
+
+    app.use('/public', express.static('public'));
+}
 
 (async () => {
     try {
@@ -31,28 +47,25 @@ const MONGO_URL = 'mongodb://localhost:27017/polutz-graphql-test',
             userRepository: new UserRepository(db),
             log
         });
-        userApp.seed();
+
+        await userApp.seed();
 
         var schema = Schema(userApp);
 
-        app.use('/', GraphQlHttp({
+        const graphqlFolder = '/graphql';
+        app.use(graphqlFolder, GraphQlHttp({
             schema,
             graphiql: true
         }));
 
+        await createGraphqlSchema(schema);
+
         app.listen(PORT, () => {
-            log('Running on http://localhost:', PORT)
-        });
-
-        //Generate schema.json
-        var json = await graphql(schema, introspectionQuery);
-        fs.writeFile('./dist/schema.json', JSON.stringify(json, null, 2), err => {
-            if (err) throw err;
-
-            console.log('Json schema created!');
+            const url = getRunningUrl(graphqlFolder);
+            log(`Running on ${url}`);
         });
     }
     catch (e) {
-        console.log(e);
+        log(e);
     }
 })();

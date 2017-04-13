@@ -67,8 +67,10 @@ module.exports = class extends Generator {
 
 
         // src - DEGING
-        this.fs.copy(this.templatePath('src/_index.ts'),
-            this.destinationPath('src/index.ts'));
+        this.fs.copyTpl(
+            this.templatePath('src/_index.ts'),
+            this.destinationPath('src/index.ts'),
+            this.options.ptz);
         // src - END
 
 
