@@ -13,6 +13,8 @@ import cors from 'cors';
 import { UserApp } from 'ptz-user-app';
 import { UserRepository } from 'ptz-user-repository';
 
+import log from 'ptz-log';
+
 var app = express();
 app.use(cors());
 
@@ -24,8 +26,6 @@ const MONGO_URL = 'mongodb://localhost:27017/polutz-graphql-test',
 (async () => {
     try {
         var db = await MongoClient.connect(MONGO_URL);
-        
-        var log = console.log;
 
         var userApp = new UserApp({
             userRepository: new UserRepository(db),
@@ -41,9 +41,7 @@ const MONGO_URL = 'mongodb://localhost:27017/polutz-graphql-test',
         }));
 
         app.listen(PORT, () => {
-            log('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> \n',
-                'Running on http://localhost:' + PORT + '/ \n',
-                '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>')
+            log('Running on http://localhost:', PORT)
         });
 
         //Generate schema.json
