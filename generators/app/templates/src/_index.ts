@@ -20,7 +20,7 @@ app.use(cors());
 
 log('starting server');
 
-const MONGO_URL = 'mongodb://localhost:27017/<%= appname %>',
+const MONGO_URL = 'mongodb://localhost:27017/ptz-graphql-test',
     PORT = 3011;
 
 function getRunningUrl(path) {
@@ -50,7 +50,7 @@ async function createGraphqlSchema(schema) {
 
         await userApp.seed();
 
-        var schema = Schema(userApp);
+        var schema = Schema(userApp, log);
 
         const graphqlFolder = '/graphql';
         app.use(graphqlFolder, GraphQlHttp({

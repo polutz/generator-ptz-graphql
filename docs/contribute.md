@@ -42,12 +42,12 @@ and it will always points to this directory
     mkdir ptz-graphql-test && cd ptz-graphql-test 
 ```
 
-### Clean test project folder
-```
-    cd .. && rm -r ptz-graphql-test && mkdir ptz-graphql-test && cd ptz-graphql-test
-```
-
 ### Run Yeoman
 ```
     yo ptz-graphql
+```
+
+### Clean test project folder
+```
+    find . -path ./.git -prune -o \( \! -path ./.yo-rc.json \) -exec rm -rf {} \; 2> /dev/null
 ```

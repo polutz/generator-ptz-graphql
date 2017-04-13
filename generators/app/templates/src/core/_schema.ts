@@ -19,9 +19,11 @@ import {
     mutationWithClientMutationId
 } from 'graphql-relay';
 
-function Schema(userApp: IUserApp) {
+import { Ilog } from 'ptz-log';
 
-    const userSchema = UserSchema(userApp);
+function Schema(userApp: IUserApp, log: Ilog) {
+
+    const userSchema = UserSchema({ userApp, log });
 
     const store = {};
 

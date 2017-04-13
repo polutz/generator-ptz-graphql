@@ -74,6 +74,11 @@ module.exports = class extends Generator {
         // src - END
 
 
+        // schema.json - DEGING
+        this.fs.copy(this.templatePath('public/_schema.json'),
+            this.destinationPath('public/schema.json'));
+        // schema.json - END
+
         // Core - DEGING
         this.fs.copy(this.templatePath('src/core/_schema.ts'),
             this.destinationPath('src/core/schema.ts'));

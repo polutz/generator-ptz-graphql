@@ -24,14 +24,20 @@ describe('ptz-domain:app', function () {
             ]);
         });
 
+        it('creates schema.json', function () {
+            assert.file([
+                'public/_schema.json'
+            ]);
+        });
+
         it('creates core files', function () {
-            assert.file([           
+            assert.file([
                 'src/core/schema.ts'
             ]);
         });
 
         it('creates users files', function () {
-            assert.file([                
+            assert.file([
                 'src/users/userSchema.ts',
                 'src/users/userQueryExamples.json',
             ]);

@@ -15,7 +15,14 @@ import {
     mutationWithClientMutationId
 } from 'graphql-relay';
 
-function UserSchema(userApp: IUserApp) {
+import { Ilog } from 'ptz-log';
+
+interface IUserSchemaArgs {
+    userApp: IUserApp;
+    log: Ilog;
+}
+
+function UserSchema({ userApp, log }: IUserSchemaArgs) {
 
     const userType = new GraphQLObjectType({
         name: 'User',
@@ -42,7 +49,7 @@ function UserSchema(userApp: IUserApp) {
             type: userConnection.connectionType,
             args: connectionArgs,
             resolve: (_, args) => {
-                console.log('getting users');
+                log('getting users');
                 return connectionFromPromisedArray(
                     userApp.find({}, { limit: args.first }),
                     args
@@ -69,7 +76,7 @@ function UserSchema(userApp: IUserApp) {
                 userEdge: {
                     type: userConnection.edgeType,
                     resolve: (user) => {
-                        console.log('ql user', user);
+                        log('ql user', user);
                         return { node: user, cursor: user.id };
                     }
                 },
@@ -78,12 +85,12 @@ function UserSchema(userApp: IUserApp) {
 
             mutateAndGetPayload: async userArgs => {
                 try {
-                    console.log('saving user:', userArgs);
+                    log('saving user:', userArgs);
                     const savedUser = await userApp.save(userArgs);
-                    console.log('saved user:', savedUser);
+                    log('saved user:', savedUser);
                     return savedUser;
                 } catch (e) {
-                    console.log('Error saving user:', e);
+                    log('Error saving user:', e);
                 }
             }
         });
