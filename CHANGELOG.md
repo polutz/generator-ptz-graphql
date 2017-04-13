@@ -1,6 +1,11 @@
 ## master
 
 
+## 1.1.0 (April 12, 2017)
+
+* Move ./dist/schema.json to ./public/schema.json.
+* Serving on: http://localhost:3011/public/schema.json
+
 ## 1.0.7 (April 12, 2017)
 
 * log from ptz-log.
