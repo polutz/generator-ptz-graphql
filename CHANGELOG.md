@@ -1,6 +1,10 @@
 ## master
 
 
+## 1.0.7 (April 12, 2017)
+
+* log from ptz-log.
+
 ## 1.0.6 (April 7, 2017)
 
 * Add log and seed users.
