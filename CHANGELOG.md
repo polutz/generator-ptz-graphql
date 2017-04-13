@@ -1,6 +1,16 @@
 ## master
 
 
+## 1.1.1 (April 13, 2017)
+
+* Add empty public/schema.json template because we need the folder 'public'
+created.
+
+* Update all console.log with ptz-log and use Ilog for dependencie
+injection.
+
+* Update README.md clean folder script.
+
 ## 1.1.0 (April 12, 2017)
 
 * Move ./dist/schema.json to ./public/schema.json.

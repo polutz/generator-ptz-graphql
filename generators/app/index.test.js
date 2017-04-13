@@ -26,7 +26,7 @@ describe('ptz-domain:app', function () {
 
         it('creates schema.json', function () {
             assert.file([
-                'public/_schema.json'
+                'public/schema.json'
             ]);
         });
 
