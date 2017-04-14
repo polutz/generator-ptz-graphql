@@ -1,6 +1,10 @@
 ## master
 
 
+## 1.1.2 (April 14, 2017)
+
+* Add ptz-log-file.
+
 ## 1.1.1 (April 13, 2017)
 
 * Add empty public/schema.json template because we need the folder 'public'
