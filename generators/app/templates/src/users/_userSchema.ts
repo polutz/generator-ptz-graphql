@@ -1,4 +1,4 @@
-import { IUserApp } from 'ptz-user-domain';
+import { ICreatedBy, IUserApp } from 'ptz-user-domain';
 
 import {
     GraphQLBoolean,
@@ -20,6 +20,10 @@ import { Ilog } from 'ptz-log';
 interface IUserSchemaArgs {
     userApp: IUserApp;
     log: Ilog;
+}
+
+interface IGraphqlContext {
+    createdBy?: ICreatedBy
 }
 
 function UserSchema({ userApp, log }: IUserSchemaArgs) {
@@ -48,10 +52,14 @@ function UserSchema({ userApp, log }: IUserSchemaArgs) {
         return {
             type: userConnection.connectionType,
             args: connectionArgs,
-            resolve: (_, args) => {
+            resolve: (_, args, ctx: IGraphqlContext) => {
                 log('getting users');
                 return connectionFromPromisedArray(
-                    userApp.find({}, { limit: args.first }),
+                    userApp.find({
+                        query: {},
+                        options: { limit: args.first },
+                        createdBy: ctx.createdBy
+                    }),
                     args
                 );
             }
@@ -83,10 +91,15 @@ function UserSchema({ userApp, log }: IUserSchemaArgs) {
                 store: outputStore
             },
 
-            mutateAndGetPayload: async userArgs => {
+            mutateAndGetPayload: async (userArgs, param2, param3) => {
                 try {
                     log('saving user:', userArgs);
-                    const savedUser = await userApp.save(userArgs);
+                    log('saving param2:', param2);
+                    log('saving param3:', param3);
+                    const savedUser = await userApp.save({
+                        userArgs,
+                        createdBy: null
+                    });
                     log('saved user:', savedUser);
                     return savedUser;
                 } catch (e) {

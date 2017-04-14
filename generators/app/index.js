@@ -45,6 +45,7 @@ module.exports = class extends Generator {
                 "graphql": "^0.9.2",
                 "graphql-relay": "^0.5.1",
                 "mongodb": "^2.2.25",
+                "ptz-log-file": "^1.0.0",
                 "ptz-user-app": "^1.2.0",
                 "ptz-user-domain": "^1.2.3",
                 "ptz-user-repository": "^1.1.1"

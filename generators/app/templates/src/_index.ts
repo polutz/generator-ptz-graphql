@@ -13,14 +13,15 @@ import cors from 'cors';
 import { UserApp } from 'ptz-user-app';
 import { UserRepository } from 'ptz-user-repository';
 
-import log from 'ptz-log';
+import logFile from 'ptz-log-file';
+const log = logFile({ dir: './logs' });
 
 var app = express();
 app.use(cors());
 
 log('starting server');
 
-const MONGO_URL = 'mongodb://localhost:27017/ptz-graphql-test',
+const MONGO_URL = 'mongodb://localhost:27017/<%= appname %>',
     PORT = 3011;
 
 function getRunningUrl(path) {
