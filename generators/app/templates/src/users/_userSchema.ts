@@ -66,7 +66,7 @@ function UserSchema({ userApp, log }: IUserSchemaArgs) {
         };
     }
 
-    function getSaveUserMutation(outputStore) {
+    function getSaveUserMutation(outputViewer) {
 
         return mutationWithClientMutationId({
             name: 'SaveUser',
@@ -88,7 +88,7 @@ function UserSchema({ userApp, log }: IUserSchemaArgs) {
                         return { node: user, cursor: user.id };
                     }
                 },
-                store: outputStore
+                viewer: outputViewer
             },
 
             mutateAndGetPayload: async (userArgs, param2, param3) => {
