@@ -1,6 +1,11 @@
 ## master
 
 
+## 1.1.3 (April 17, 2017)
+
+* Add menu.
+* Add app settings like title and subTitle.
+
 ## 1.1.2 (April 14, 2017)
 
 * Add ptz-log-file.
