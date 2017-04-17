@@ -48,7 +48,8 @@ module.exports = class extends Generator {
                 "ptz-log-file": "^1.0.0",
                 "ptz-user-app": "^1.2.0",
                 "ptz-user-domain": "^1.2.3",
-                "ptz-user-repository": "^1.1.1"
+                "ptz-user-repository": "^1.1.1",
+                "ptz-menu-domain": "^1.0.0",
             }
         }, currentPkg);
 
@@ -72,6 +73,11 @@ module.exports = class extends Generator {
             this.templatePath('src/_index.ts'),
             this.destinationPath('src/index.ts'),
             this.options.ptz);
+
+        this.fs.copyTpl(
+            this.templatePath('src/_mongoDbUrl.ts'),
+            this.destinationPath('src/mongoDbUrl.ts'),
+            this.options.ptz);
         // src - END
 
 
@@ -83,6 +89,9 @@ module.exports = class extends Generator {
         // Core - DEGING
         this.fs.copy(this.templatePath('src/core/_schema.ts'),
             this.destinationPath('src/core/schema.ts'));
+
+        this.fs.copy(this.templatePath('src/core/_appSchema.ts'),
+            this.destinationPath('src/core/appSchema.ts'));
         // Core - END
 
         // Users - BEGIN
@@ -92,6 +101,11 @@ module.exports = class extends Generator {
         this.fs.copy(this.templatePath('src/users/_userQueryExamples.json'),
             this.destinationPath('src/users/userQueryExamples.json'));
         // Users - END
+
+        // Menus - BEGIN
+        this.fs.copy(this.templatePath('src/menus/_menuSchema.ts'),
+            this.destinationPath('src/menus/menuSchema.ts'));
+        // Menus - END
     }
 
     //default - If the method name doesn't match a priority, it will be pushed to this group.

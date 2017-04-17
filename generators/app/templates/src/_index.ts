@@ -1,14 +1,16 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
+import cors from 'cors';
 import express from 'express';
-import Schema from './core/schema';
 import GraphQlHttp from 'express-graphql';
-import { MongoClient } from 'mongodb';
+import * as fs from 'fs';
 import { graphql } from 'graphql';
 import { introspectionQuery } from 'graphql/utilities';
-import * as fs from 'fs';
-import cors from 'cors';
+import { MongoClient } from 'mongodb';
+import Schema from './core/schema';
+
+import MONGO_URL from './mongoDbUrl';
 
 import { UserApp } from 'ptz-user-app';
 import { UserRepository } from 'ptz-user-repository';
@@ -16,21 +18,20 @@ import { UserRepository } from 'ptz-user-repository';
 import logFile from 'ptz-log-file';
 const log = logFile({ dir: './logs' });
 
-var app = express();
+const app = express();
 app.use(cors());
 
 log('starting server');
 
-const MONGO_URL = 'mongodb://localhost:27017/<%= appname %>',
-    PORT = 3011;
+const PORT = 3011;
 
 function getRunningUrl(path) {
     return `http://localhost:${PORT}${path}`;
 }
 
 async function createGraphqlSchema(schema) {
-    var json = await graphql(schema, introspectionQuery);
-    var file = '/public/schema.json';
+    const json = await graphql(schema, introspectionQuery);
+    const file = '/public/schema.json';
     fs.writeFile(`.${file}`, JSON.stringify(json, null, 2), err => {
         if (err) throw err;
 
@@ -42,16 +43,16 @@ async function createGraphqlSchema(schema) {
 
 (async () => {
     try {
-        var db = await MongoClient.connect(MONGO_URL);
+        const db = await MongoClient.connect(MONGO_URL);
 
-        var userApp = new UserApp({
+        const userApp = new UserApp({
             userRepository: new UserRepository(db),
             log
         });
 
         await userApp.seed();
 
-        var schema = Schema(userApp, log);
+        const schema = Schema(userApp, log);
 
         const graphqlFolder = '/graphql';
         app.use(graphqlFolder, GraphQlHttp({
@@ -65,8 +66,7 @@ async function createGraphqlSchema(schema) {
             const url = getRunningUrl(graphqlFolder);
             log(`Running on ${url}`);
         });
-    }
-    catch (e) {
+    } catch (e) {
         log(e);
     }
 })();

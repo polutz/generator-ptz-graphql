@@ -20,7 +20,8 @@ describe('ptz-domain:app', function () {
                 'tsconfig.json',
                 '.gitignore',
                 '.travis.yml',
-                'src/index.ts'
+                'src/index.ts',
+                'src/mongoDbUrl.ts'
             ]);
         });
 
@@ -32,7 +33,8 @@ describe('ptz-domain:app', function () {
 
         it('creates core files', function () {
             assert.file([
-                'src/core/schema.ts'
+                'src/core/schema.ts',
+                'src/core/appSchema.ts'
             ]);
         });
 
@@ -40,6 +42,12 @@ describe('ptz-domain:app', function () {
             assert.file([
                 'src/users/userSchema.ts',
                 'src/users/userQueryExamples.json',
+            ]);
+        });
+
+        it('creates menuss files', function () {
+            assert.file([
+                'src/menus/menuSchema.ts'
             ]);
         });
     });
