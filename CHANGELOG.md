@@ -1,6 +1,10 @@
 ## master
 
 
+## 1.1.4 (April 17, 2017)
+
+* Fix update userSchema outputFields.store to .viewer.
+
 ## 1.1.3 (April 17, 2017)
 
 * Add menu.
