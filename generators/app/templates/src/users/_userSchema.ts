@@ -1,4 +1,4 @@
-import { ICreatedBy, IUserApp } from 'ptz-user-domain';
+import { IAuthToken, ICreatedBy, IUserApp } from 'ptz-user-domain';
 
 import {
     GraphQLBoolean,
@@ -23,7 +23,7 @@ interface IUserSchemaArgs {
 }
 
 interface IGraphqlContext {
-    createdBy?: ICreatedBy
+    createdBy?: ICreatedBy;
 }
 
 function UserSchema({ userApp, log }: IUserSchemaArgs) {
@@ -98,7 +98,7 @@ function UserSchema({ userApp, log }: IUserSchemaArgs) {
                     log('saving param3:', param3);
                     const savedUser = await userApp.save({
                         userArgs,
-                        createdBy: null
+                        createdBy: null // TODO: FIX IT! SEND createdBy from context
                     });
                     log('saved user:', savedUser);
                     return savedUser;
@@ -109,9 +109,57 @@ function UserSchema({ userApp, log }: IUserSchemaArgs) {
         });
     }
 
+    function getAuthTokenMutation(outputViewer) {
+
+        return mutationWithClientMutationId({
+            name: 'GetAuthToken',
+
+            inputFields: {
+                userNameOrEmail: { type: new GraphQLNonNull(GraphQLString) },
+                password: { type: new GraphQLNonNull(GraphQLString) }
+            },
+
+            outputFields: {
+                userEdge: {
+                    type: userConnection.edgeType,
+                    resolve: (authToken: IAuthToken) => {
+                        if (authToken.user == null)
+                            return null;
+
+                        return { node: authToken.user, cursor: authToken.user.id };
+                    }
+                },
+                authToken: {
+                    type: GraphQLString,
+                    resolve: (authToken: IAuthToken) => authToken.authToken
+                },
+                errors: {
+                    type: new GraphQLList(GraphQLString),
+                    resolve: (authToken: IAuthToken) => authToken.errors
+                },
+                viewer: outputViewer
+            },
+
+            mutateAndGetPayload: async (form, param2, param3) => {
+                try {
+                    log('getAuthToken input:', form);
+                    const authToken = await userApp.getAuthToken({
+                        form,
+                        createdBy: null// TODO: FIX IT! SEND createdBy from context
+                    });
+                    log('getAuthToken return:', authToken);
+                    return authToken;
+                } catch (e) {
+                    log('Error saving user:', e);
+                }
+            }
+        });
+    }
+
     return {
         getSaveUserMutation,
-        getUserConnection
+        getUserConnection,
+        getAuthTokenMutation
     };
 }
 

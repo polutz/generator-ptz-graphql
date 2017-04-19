@@ -61,7 +61,8 @@ function Schema(userApp: IUserApp, log: Ilog) {
         mutation: new GraphQLObjectType({
             name: 'Mutation',
             fields: () => ({
-                saveUser: userSchema.getSaveUserMutation(outputViewer)
+                saveUser: userSchema.getSaveUserMutation(outputViewer),
+                getAuthToken: userSchema.getAuthTokenMutation(outputViewer)
             })
         })
     });
