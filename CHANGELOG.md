@@ -1,6 +1,10 @@
 ## master
 
 
+## 1.1.5 (April 19, 2017)
+
+* Add getAuthToken mutation.
+
 ## 1.1.4 (April 17, 2017)
 
 * Fix update userSchema outputFields.store to .viewer.
